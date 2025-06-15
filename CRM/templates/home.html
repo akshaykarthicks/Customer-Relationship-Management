@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="flex justify-center items-center h-screen">
+    <center>
+<h1  style="font-family: monospace;"> Client Records Manager</h1>
+</center>
+</div>
+
+
+{% if user.is_authenticated %}
+<H1 style="font-family: monospace;">Hello {{user.username}}</H1>
+
+<style>
+.nothing-table {
+    font-family: monospace;
+}
+</style>
+<table class="table table-success table-striped table-hover table-bordered nothing-table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% if records %}
+        {% for record in records %}
+        <tr>
+
+            <td>{{record.id}}</td>
+            <td> <a href="{% url 'c_record' record.id %}">{{record.name}}</td>
+            <td>{{record.age}}</td>
+            <td>{{record.email}}</td>
+            <td>{{record.phone}}</td>
+            <td>{{record.address}}</td>
+        </tr>
+
+        {% endfor %}
+        {% endif %}
+    </tbody>
+</table>
+
+{% else %}
+<style>
+    .nothing-form-container {
+        max-width: 400px;
+        margin: 40px auto;
+        background: rgba(255,255,255,0.7);
+        border: 1.5px solid #d0d0d5;
+        border-radius: 18px;
+        box-shadow: 0 6px 32px rgba(0,0,0,0.08);
+        padding: 32px 28px 28px 28px;
+        backdrop-filter: blur(6px);
+        font-family: monospace;
+    }
+    .nothing-form-container h1 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 24px;
+        letter-spacing: 0.03em;
+        color: #111;
+        text-align: center;
+    }
+    .nothing-input {
+        width: 100%;
+        padding: 12px 14px;
+        margin-bottom: 18px;
+        border: 1.5px solid #e0e0e5;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.5);
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        box-shadow: none;
+    }
+    .nothing-input:focus {
+        border-color: #a4a4ff;
+        box-shadow: 0 0 0 2px #e0e0ff;
+        background: rgba(255,255,255,0.8);
+    }
+    .nothing-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        background: #111;
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+        letter-spacing: 0.04em;
+    }
+    .nothing-btn:hover, .nothing-btn:focus {
+        background: #333;
+        color: #fff;
+    }
+</style>
+<div class="nothing-form-container">
+    <h1>Login Here</h1>
+    <form method="post" action="{% url 'home' %}">
+        {% csrf_token %}
+        <input type="text" class="nothing-input" name="username" required placeholder="Enter your username">
+        <input type="password" class="nothing-input" name="password" required placeholder="Enter your password">
+        <button type="submit" class="nothing-btn">Login</button>
+    </form>
+</div>
+
+{% endif %}
+</div>
+
+{% endblock %}

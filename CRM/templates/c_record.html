@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .nothing-view-container {
+        max-width: 420px;
+        margin: 40px auto;
+        background: rgba(255,255,255,0.7);
+        border: 1.5px solid #d0d0d5;
+        border-radius: 18px;
+        box-shadow: 0 6px 32px rgba(0,0,0,0.08);
+        padding: 32px 28px 28px 28px;
+        backdrop-filter: blur(6px);
+        text-align: center;
+        font-family: monospace;
+    }
+    .nothing-view-container h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+        color: #111;
+    }
+    .nothing-view-container .record-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #222;
+    }
+    .nothing-view-container .record-date {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 14px;
+    }
+    .nothing-view-container .record-field {
+        font-size: 1.08rem;
+        color: #222;
+        margin-bottom: 7px;
+        display: block;
+        font-weight: 500;
+    }
+    .nothing-btn {
+        width: auto;
+        padding: 6px 14px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        background: #111;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+        letter-spacing: 0.04em;
+        margin: 8px 2% 0 0;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .nothing-btn:last-child {
+        background: #e74c3c;
+    }
+    .nothing-btn:hover, .nothing-btn:focus {
+        background: #333;
+        color: #fff;
+        text-decoration: none;
+    }
+    .nothing-btn:last-child:hover, .nothing-btn:last-child:focus {
+        background: #c0392b;
+    }
+</style>
+<div class="nothing-view-container">
+    <h1>View Record</h1>
+    <div class="record-title">{{c_r.name}}</div>
+    <div class="record-date">{{c_r.created_at}}</div>
+    <div class="record-fields-block" style="margin: 24px 0 16px 0; text-align: left; color: #222; font-size: 1rem; line-height: 1.7; max-width: 300px; margin-left: auto; margin-right: auto;">
+        <div><span style="font-weight:600;">Age:</span> {{c_r.age}}</div>
+        <div><span style="font-weight:600;">Email:</span> {{c_r.email}}</div>
+        <div><span style="font-weight:600;">Phone:</span> {{c_r.phone}}</div>
+        <div><span style="font-weight:600;">Address:</span> {{c_r.address}}</div>
+    </div>
+    <div style="display: flex; justify-content: center; gap: 14px; padding-top: 10px;">
+        <a href="{% url 'home' %}" class="nothing-btn">Back</a>
+        <a href="{% url 'delete_record' c_r.id %}" class="nothing-btn">Delete</a>
+        <a href="{% url 'update_record' c_r.id %}" class="nothing-btn">Update</a>
+    </div>
+</div>
+  
+{% endblock %}

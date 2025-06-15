@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    body {
+        font-family: monospace;
+        background: #f7f7fa;
+        color: #222;
+    }
+    .nothing-form-container {
+        max-width: 400px;
+        margin: 40px auto;
+        background: rgba(255,255,255,0.7);
+        border: 1.5px solid #d0d0d5;
+        border-radius: 18px;
+        box-shadow: 0 6px 32px rgba(0,0,0,0.08);
+        padding: 32px 28px 28px 28px;
+        backdrop-filter: blur(6px);
+    }
+    .nothing-form-container h1 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 24px;
+        letter-spacing: 0.03em;
+        color: #111;
+        text-align: center;
+    }
+    .nothing-input {
+        width: 100%;
+        padding: 12px 14px;
+        margin-bottom: 18px;
+        border: 1.5px solid #e0e0e5;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.5);
+        font-size: 1rem;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        box-shadow: none;
+    }
+    .nothing-input:focus {
+        border-color: #a4a4ff;
+        box-shadow: 0 0 0 2px #e0e0ff;
+        background: rgba(255,255,255,0.8);
+    }
+    .nothing-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        background: #111;
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+        letter-spacing: 0.04em;
+    }
+    .nothing-btn:hover, .nothing-btn:focus {
+        background: #333;
+        color: #fff;
+    }
+</style>
+
+<div class="nothing-form-container">
+    <h1>Update Record</h1>
+    <form method="post" action="{% url 'update_record' c_r.id %}">
+        {% csrf_token %}
+        <input type="text" class="nothing-input" name="name" required placeholder="Enter your name">
+        <input type="number" class="nothing-input" name="age" required placeholder="Enter your age">
+        <input type="email" class="nothing-input" name="email" required placeholder="Enter your email">
+        <input type="tel" class="nothing-input" name="phone" required placeholder="Enter your phone">
+        <input type="text" class="nothing-input" name="address" required placeholder="Enter your address">
+        <button type="submit" class="nothing-btn">Update Record</button>
+    </form>
+</div>
+{% endblock %}
+
+
